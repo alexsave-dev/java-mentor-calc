@@ -13,9 +13,8 @@ public class Main {
             if (expression.equals("exit")) {
                 return;
             }
-            Parser parser = new Parser();
-            parser.parse(expression);
-            ConsoleHelper.writeMessage("The result is " + new Calculator(parser).calculate());
+
+            ConsoleHelper.writeMessage("The result is " + Calculator.calculate(expression));
         }
     }
 }

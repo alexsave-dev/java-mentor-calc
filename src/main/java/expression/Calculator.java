@@ -1,6 +1,7 @@
 package expression;
 
 import exception.CalculationException;
+import exception.ParsingException;
 
 /**
  * The {@code Calculator} class to calculate the result for operands
@@ -8,14 +9,12 @@ import exception.CalculationException;
  */
 public class Calculator {
 
-    private Parser parser;
+    public static String calculate(String expression) throws CalculationException, ParsingException {
 
-    public Calculator(Parser parser) {
-        this.parser = parser;
-    }
+        Parser parser = new Parser();
+        parser.parse(expression);
 
-    public String calculate() throws CalculationException {
-        int result = 0;
+        int result;
         int firstOperand = Integer.parseInt(parser.getFirstOperand());
         int secondOperand = Integer.parseInt(parser.getSecondOperand());
         switch (parser.getArithmeticOperation()) {
@@ -31,6 +30,8 @@ public class Calculator {
             case DIVIDE:
                 result = firstOperand / secondOperand;
                 break;
+            default:
+                throw new CalculationException("Incorrect operator");
         }
 
         if (parser.isArabicOperands()) {
